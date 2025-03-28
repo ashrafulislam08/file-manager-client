@@ -15,6 +15,20 @@ const SignUp = () => {
     });
   };
 
+  const [otpData, setOtpData] = useState({
+    number1: "",
+    number2: "",
+    number3: "",
+    number4: "",
+  });
+
+  const otpInputHandler = (e) => {
+    setOtpData({
+      ...otpData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const [submitResponse, setSubmitResponse] = useState(false);
   const [res, setRes] = useState(false);
   const handleSubmit = (e) => {
@@ -27,6 +41,11 @@ const SignUp = () => {
     }
   };
 
+  const otpSubmit = (e) => {
+    e.preventDefault();
+    console.log(otpData);
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-200 flex justify-center items-center">
       <div className="w-[950px] h-[500px] flex justify-center items-center bg-white rounded-md overflow-hidden">
@@ -37,7 +56,7 @@ const SignUp = () => {
           {res ? (
             <div>
               <p>Please enter the authentication code sent to your email</p>
-              <form action="" className="mt-4">
+              <form onSubmit={otpSubmit} action="" className="mt-4">
                 <div className="w-full flex flex-col gap-y-8">
                   <div className="w-ful grid grid-cols-4 gap-x-3">
                     <input
@@ -45,24 +64,32 @@ const SignUp = () => {
                       required
                       name="number1"
                       className="input-field"
+                      onChange={otpInputHandler}
+                      value={otpData.number1}
                     />
                     <input
                       type="text"
                       required
                       name="number2"
                       className="input-field"
+                      onChange={otpInputHandler}
+                      value={otpData.number2}
                     />
                     <input
                       type="text"
                       required
                       name="number3"
                       className="input-field"
+                      onChange={otpInputHandler}
+                      value={otpData.number3}
                     />
                     <input
                       type="text"
                       required
                       name="number4"
                       className="input-field"
+                      onChange={otpInputHandler}
+                      value={otpData.number4}
                     />
                   </div>
                 </div>
