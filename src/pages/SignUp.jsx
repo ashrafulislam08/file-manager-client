@@ -1,6 +1,31 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
+import { useState } from "react";
 const SignUp = () => {
+  const [state, setState] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInput = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const [submitResponse, setSubmitResponse] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      submitResponse(true);
+    } catch (error) {
+      setSubmitResponse(false);
+    }
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-200 flex justify-center items-center">
       <div className="w-[950px] h-[500px] flex justify-center items-center bg-white rounded-md overflow-hidden">
@@ -10,22 +35,28 @@ const SignUp = () => {
         <div className="w-[350px] flex justify-center items-center p-5 h-full  ">
           <div className="text-[#2f2b3dc7] w-full relative">
             <h2 className="text-2xl">Sign Up</h2>
-            <form className="pt-4">
+            <form onSubmit={handleSubmit} className="pt-4">
               <div className="flex flex-col gap-y-2 mb-3">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   name="name"
+                  onChange={handleInput}
+                  value={state.name}
                   placeholder="Name"
                   id="name"
                   className="input-field"
+                  required
                 />
               </div>
               <div className="flex flex-col gap-y-2 mb-3">
                 <label htmlFor="email">Email</label>
                 <input
+                  required
                   type="email"
                   name="email"
+                  onChange={handleInput}
+                  value={state.email}
                   placeholder="Email"
                   className="input-field"
                   id="email"
@@ -34,8 +65,11 @@ const SignUp = () => {
               <div className="flex flex-col gap-y-2 mb-3">
                 <label htmlFor="password">Name</label>
                 <input
+                  required
                   type="password"
                   name="password"
+                  onChange={handleInput}
+                  value={state.password}
                   placeholder="Password"
                   id="password"
                   className="input-field"
