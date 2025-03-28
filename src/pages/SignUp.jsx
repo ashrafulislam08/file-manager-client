@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 const SignUp = () => {
   return (
@@ -40,10 +41,19 @@ const SignUp = () => {
                   className="input-field"
                 />
               </div>
-              <button className="w-full text-white px-3 py-2 rounded outline-none bg-blue-500 mt-3 cursor-pointer">
+              <button className="w-full text-white px-3 py-2 rounded outline-none bg-blue-500 mt-3 cursor-pointer hover:shadow-lg hover:bg-blue-600">
                 Sign Up
               </button>
             </form>
+            <div className="flex w-full mt-4 justify-center items-center gap-x-2">
+              <span className="text-md">Already have an account?</span>
+              <Link
+                className="text-md text-blue-500 hover:text-blue-600 hover:underline cursor-pointer"
+                to="/signin"
+              >
+                Sign In
+              </Link>
+            </div>
           </div>
         </div>
       </div>
