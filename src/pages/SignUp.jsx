@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const SignUp = () => {
   const [state, setState] = useState({
     name: "",
@@ -46,6 +46,35 @@ const SignUp = () => {
     console.log(otpData);
   };
 
+  useEffect(() => {
+    const inputs = document.querySelectorAll(".otp_field");
+    inputs.forEach((input, idx) => {
+      input.addEventListener("keyup", (e) => {
+        const currentInput = input;
+        let nextInput = input.nextElementSibling;
+        let prevInput = input.previousElementSibling;
+
+        if (currentInput.value.length > 1) {
+          currentInput.value = "";
+          return;
+        }
+
+        if (
+          nextInput &&
+          nextInput.hasAttribute("disabled") &&
+          currentInput.value !== ""
+        ) {
+          nextInput.removeAttribute("disabled");
+          nextInput.focus();
+        }
+
+        if (!inputs[3].disabled && inputs[3].value !== "") {
+          return;
+        }
+      });
+    });
+  }, [res]);
+
   return (
     <div className="w-screen h-screen bg-slate-200 flex justify-center items-center">
       <div className="w-[950px] h-[500px] flex justify-center items-center bg-white rounded-md overflow-hidden">
@@ -63,7 +92,7 @@ const SignUp = () => {
                       type="text"
                       required
                       name="number1"
-                      className="input-field"
+                      className="input-field otp_field"
                       onChange={otpInputHandler}
                       value={otpData.number1}
                     />
@@ -71,7 +100,7 @@ const SignUp = () => {
                       type="text"
                       required
                       name="number2"
-                      className="input-field"
+                      className="input-field otp_field"
                       onChange={otpInputHandler}
                       value={otpData.number2}
                     />
@@ -79,7 +108,7 @@ const SignUp = () => {
                       type="text"
                       required
                       name="number3"
-                      className="input-field"
+                      className="input-field otp_field"
                       onChange={otpInputHandler}
                       value={otpData.number3}
                     />
@@ -87,7 +116,7 @@ const SignUp = () => {
                       type="text"
                       required
                       name="number4"
-                      className="input-field"
+                      className="input-field otp_field"
                       onChange={otpInputHandler}
                       value={otpData.number4}
                     />
